@@ -2,19 +2,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Quicksand',sans-serif;
-    
-    
+    font-family: 'Quicksand',sans-serif;  
+    font-size: 10px; 
   }
+
   body{
-      background: #091921;
+      background:rgb(50,23,77);
   }
 
   .main{    
-    height: 47em;
     width: 100%;
-    border-style:solid;
-    border-color: #fff;
     margin:auto;
     min-height: 80vh;
   }
@@ -28,7 +25,7 @@
       background:linear-gradient(#e91e63, #ffc107);
       clip-path:circle(22% at 30% 20%);
   }
-  body::after{
+  main::after{
     content:'';
     position: absolute;
     top: 0;
@@ -37,6 +34,11 @@
     height: 100%;
     background:linear-gradient(#ffffff, #da00ff);
     clip-path:circle(20% at 90% 90%);
+}
+.container{
+    height: 650px;
+    width: 450px;
+    margin: auto;
 }
   .calculator{
       height: 600px;
@@ -48,20 +50,32 @@
   }
   .calculator{
       position: relative;
+      backdrop-filter: blur(25px);
       background: rgb(255, 255, 255,0.05);
       border-radius: 6px;
       overflow: hidden;
       z-index: 10;
-      backdrop-filter: blur(15px);
       border-top: 1px solid rgba(255,255,255,0.2);
       border-left: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+      box-shadow: 5px 5px 30px rgba(0,0,0,0.01);
   }
   .display{
-    height: 80px;    
+    height: 200px;    
     width: 100%;
-  }
-  .action-button{
+    font-weight: 400;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    
+    }
+p{
+    text-align:right;
+    position: relative;
+    margin-top: 100px;
+    margin-right: 5px;
+    font-weight: 400;
+    font-size: 3em;
+    color: #ffffff;
+}
+  .action-button{    
     height: 80px;
     display:flex;
     justify-content:space-between;
@@ -70,22 +84,35 @@
     height: 80%;    
     display:grid;
     grid-template-columns:repeat(4, 1fr);
+    
 }
 
 .display .calculator .action-button .wrap-numbers{
     background:transparent;
-    font-size: 30px;
-    text-align: right;
-    color: #ffffff;
-    outline: none;
-    border: none;
-    padding: 10px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-left: 1px solid rgba(255,255,255,0.05);
+}
+
+.btn{
+    background:transparent;    
+    border:none; 
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    padding: 0px 0px;
+    
+
+}
+.action{
+    width: 50%;
 }
 
 footer{
     border-style:solid;
     height: 20%; 
     display: flex; 
+}
+
+
+.calculator btn:focus{
+    background: rgb(138,43,226);
+    
 }
