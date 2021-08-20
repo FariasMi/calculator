@@ -36,11 +36,11 @@
     clip-path:circle(20% at 90% 90%);
 }
 
-.calculator .display .action-button .wrap-numbers {
+#calculator .display .action-button .wrap-numbers {
     background:transparent;
     
 }
-  .calculator{
+  #calculator{
       height: 700px;
       width: 400px;
       margin: auto;    
@@ -48,7 +48,7 @@
       display:flex;
       flex-direction: column;
   }
-  .calculator{              
+  #calculator{              
       background: rgb(255, 255, 255,0.1);
       backdrop-filter: blur(10px);
       border-radius: 6px;
@@ -74,12 +74,19 @@
     }
     .current-display{
         height: 60%;    
+        color: #ffffff;
+        font-weight: 600;
+        width: 400px;
+        white-space: nowrap;
        
         
     }
     p{
         color: #ffffff;
         font-weight: 600;
+        width: 400px;
+        white-space: nowrap;
+       
         
     }
    
@@ -89,6 +96,8 @@
         font-size: 3em;
         margin-top:60px;
         float: right;
+        white-space: initial;
+        
     }
     #old-value{
         font-size: 2em;
