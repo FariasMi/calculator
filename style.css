@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'Quicksand',sans-serif;  
     font-size: 10px; 
+    color:#ffffff;
   }
 
   body{
@@ -68,17 +69,19 @@
     
     
     }    
-    .old-display{
+    #old-display{
         height: 40%; 
         margin-top: 0px;
+        font-size: 2.5em;
+        font-size: 2.5em;
+        text-align:end; 
     }
-    .current-display{
+    #current-display{
         height: 60%;    
-        color: #ffffff;
         font-weight: 600;
         width: 400px;
-        white-space: nowrap;
-       
+        font-size: 2.5em;
+        text-align:end;      
         
     }
     p{
@@ -110,7 +113,7 @@
     display:flex;
     justify-content:space-between;
 }
-.wrap-numbers{    
+  .wrap-numbers{    
     height: 80%;    
     display:grid;
     grid-template-columns:repeat(4, 1fr);
@@ -126,6 +129,7 @@
     border-radius: 6px;
     font-size: 1.8em;
     font-weight: 500;
+    color:#000000;
 }
 .action{
     width: 50%;

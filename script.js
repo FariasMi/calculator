@@ -1,21 +1,18 @@
-const btn = document.getElementById('calculator');
+const calculator = document.getElementById('calculator');
+const currentDisplay = document.getElementById('current-display');
+const oldDisplay = document.getElementById('old-display');
 
-btn.addEventListener('click',function(e){
-    const number = e.target.getAttribute('data-number');
-    if(!number)return;
-    const displayNumber= document.getElementById('current-display');
-    displayNumber.innerHTML += number;
+calculator.addEventListener('click',function(e){
+    const numbers = e.target.getAttribute('data-number');  
+    if(!numbers) return;
+    currentDisplay.innerHTML += numbers;
+    let number = currentDisplay.textContent;
+    
 });
 
 
 
-const element = document.querySelector('.number');
 
-//console.log(number)
-//function getNumbers(){    
-//    document.getElementById('current-value').innerHTML = numbers.value
-
-//}
 
 
 function add(number1,number2){
@@ -39,6 +36,8 @@ function divide (number1,number2){
 }
 
 function operate(operator,...numbers){
+
+
     switch(operator){
         case '+':
             add(...numbers);
