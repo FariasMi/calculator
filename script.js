@@ -1,19 +1,30 @@
-const calculator = document.getElementById('calculator');
+const btnNumbers = document.querySelectorAll('[data-number]');
+const btnOperators = document.querySelectorAll('[data-operator');
+const btnEqual = document.querySelector('[data-equal');
+const btnDelete = document.querySelector('[data-delete]');
+const btnClear = document.querySelector('[data-clear]');
 const currentDisplay = document.getElementById('current-display');
-const oldDisplay = document.getElementById('old-display');
+const oldDisplay =  document.getElementById('old-display');
 
-calculator.addEventListener('click',function(e){
-    const numbers = e.target.getAttribute('data-number');  
-    if(!numbers) return;
-    currentDisplay.innerHTML += numbers;
-    let number = currentDisplay.textContent;
+
+function clear(){
+    currentDisplay.innerHTML = '';
+    oldDisplay.innerHTML = '';
     
-});
 
+}
 
+function del(){
 
+}
 
+function getNumbers(){
 
+}
+
+function getOperators(){
+    
+}
 
 function add(number1,number2){
     return number1+ number2;
@@ -55,4 +66,5 @@ function operate(operator,...numbers){
     }
 
 }
-//numbers.addEventListener('click',getNumbers);
+
+calculator.addEventListener('click',getNumbers);
