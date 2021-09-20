@@ -1,3 +1,7 @@
+var operator;
+var firstOperand;
+var secondOperand;
+
 const btnNumbers = document.querySelectorAll('[data-number]');
 const btnOperators = document.querySelectorAll('[data-operator]');
 const btnEqual = document.querySelector('[data-equals]');
@@ -5,7 +9,7 @@ const btnDelete = document.querySelector('[data-delete]');
 const btnClear = document.querySelector('[data-clear]');
 const currentDisplay = document.getElementById('current-display');
 const oldDisplay =  document.getElementById('old-display');
-var operator;
+
 
 
 btnNumbers.forEach(btn => btn.addEventListener('click',()=>{
@@ -15,10 +19,7 @@ btnNumbers.forEach(btn => btn.addEventListener('click',()=>{
 
 btnOperators.forEach(btn => btn.addEventListener('click',()=>{
     operator = btn.innerText;
-    chooseOperator (operator);
-    updateDisplay();
-       
-
+    chooseOperator();
 }));
   
 
@@ -26,41 +27,45 @@ btnOperators.forEach(btn => btn.addEventListener('click',()=>{
 function appendNumbers(btnNumber){
     let number = currentDisplay.textContent;
     if(number.includes('.') && btnNumber==='.') return;
-     number = number + btnNumber;
-     currentDisplay.innerHTML = number.toString();  
+    firstOperand = number + btnNumber;
+    currentDisplay.innerHTML = firstOperand.toString();  
         
 }
 
 function chooseOperator(){
-   
-   
+  if (firstOperand === '') return;
+  if(secondOperand !== ''){
+      operate();
+  }
+  
+  secondOperand = firstOperand;
+  firstOperand = '';
+  updateDisplay();
 }
 
 function clear(){
-    currentDisplay.innerHTML = '';
-    oldDisplay.innerHTML = '';
- }
+    firstOperand = '';
+    secondOperand = '';
+    updateDisplay();
+   
+}
 
 function del(){
-    let number = currentDisplay.innerText;
-    currentDisplay.innerHTML = number.slice(0,-1);
+    currentDisplay.innerHTML = firstOperand.slice(0,-1);
+    firstOperand = currentDisplay.innerText;
 }
 
 function updateDisplay(){
-    if(operator != ''){
-    
-    }
+   currentDisplay.innerHTML = firstOperand;
+   oldDisplay.innerHTML = secondOperand;
 }
 
 function operate(){
     let computation;
-    const prevNumber = parseFloat(oldDisplay.innerText);
-    console.log(prevNumber);
-    const currentNumber = parseFloat(currentDisplay.innerText);
-    console.log(currentNumber);
-    console.log(operator);
+    const prevNumber = parseFloat(secondOperand);
+    const currentNumber = parseFloat(firstOperand);
+ 
     if (operator === '') return;
-
     if(isNaN(prevNumber) || isNaN(currentNumber))return;
 
 
