@@ -1,5 +1,5 @@
 const btnNumbers = document.querySelectorAll('[data-number]');
-const btnOperators = document.querySelectorAll('[data-operator');
+const btnOperators = document.querySelectorAll('[data-operator]');
 const btnEqual = document.querySelector('[data-equals]');
 const btnDelete = document.querySelector('[data-delete]');
 const btnClear = document.querySelector('[data-clear]');
@@ -32,12 +32,7 @@ function appendNumbers(btnNumber){
 }
 
 function chooseOperator(){
-    if(currentDisplay.innerText === '') return;
-    if(oldDisplay.innerText !== ''){
-        operate();
-    }
-    oldDisplay.innerHTML = currentDisplay.innerText;
-    currentDisplay.innerHTML = '';
+   
    
 }
 
