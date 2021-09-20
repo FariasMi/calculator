@@ -5,6 +5,8 @@ const btnDelete = document.querySelector('[data-delete]');
 const btnClear = document.querySelector('[data-clear]');
 const currentDisplay = document.getElementById('current-display');
 const oldDisplay =  document.getElementById('old-display');
+var operator;
+
 
 btnNumbers.forEach(btn => btn.addEventListener('click',()=>{
     appendNumbers (btn.innerText);
@@ -12,30 +14,32 @@ btnNumbers.forEach(btn => btn.addEventListener('click',()=>{
 }));
 
 btnOperators.forEach(btn => btn.addEventListener('click',()=>{
-    chooseOperator(btn.innerText);
+    operator = btn.innerText;
+    chooseOperator (operator);
+    updateDisplay();
+       
 
 }));
   
+
 
 function appendNumbers(btnNumber){
     let number = currentDisplay.textContent;
     if(number.includes('.') && btnNumber==='.') return;
      number = number + btnNumber;
-     currentDisplay.innerHTML = number;  
+     currentDisplay.innerHTML = number.toString();  
         
 }
 
-function chooseOperator(btnOperator){
-    let operator = btnOperator;
-    if(currentDisplay.innerText ==='')return;
-    if(oldDisplay.innerText != ''){
-       operate(operator);
+function chooseOperator(){
+    if(currentDisplay.innerText === '') return;
+    if(oldDisplay.innerText !== ''){
+        operate();
     }
     oldDisplay.innerHTML = currentDisplay.innerText;
     currentDisplay.innerHTML = '';
+   
 }
-
-
 
 function clear(){
     currentDisplay.innerHTML = '';
@@ -43,54 +47,54 @@ function clear(){
  }
 
 function del(){
-
+    let number = currentDisplay.innerText;
+    currentDisplay.innerHTML = number.slice(0,-1);
 }
 
-function operate(operator){
-    let computation;
-    const oldNumber = oldDisplay.innerText;
-    const currentNumber = currentDisplay.innerText;
+function updateDisplay(){
+    if(operator != ''){
     
+    }
+}
+
+function operate(){
+    let computation;
+    const prevNumber = parseFloat(oldDisplay.innerText);
+    console.log(prevNumber);
+    const currentNumber = parseFloat(currentDisplay.innerText);
+    console.log(currentNumber);
+    console.log(operator);
+    if (operator === '') return;
+
+    if(isNaN(prevNumber) || isNaN(currentNumber))return;
+
 
     switch(operator){
         case '+':
-            add(...numbers);
-        break;
+            computation = prevNumber + currentNumber;
+            break;
         case '-':
-            subtract(...numbers);
-        break;
-        case '*' :
-            multiply(...numbers);
-        break;
-        case'/':
-            divide(...numbers);
+            computation = prevNumber - currentNumber;
+            break;
+        case 'x' :
+            computation = prevNumber * currentNumber;
+            break;
+        case'÷':
+            computation = prevNumber / currentNumber;
+            break
+        default:
+            return;
 
 
     }
-
+    console.log(computation);
+    currentDisplay.innerHTML = computation.toString();
+    operator = '';
+    oldDisplay.innerHTML = '';
 
 
 }
-function add(number1,number2){
-    return number1+ number2;
-}
-
-function subtract(number1,number2){
-    return number1-number2;
-}
-
-function multiply(number1,number2){
-    return number1 * number2;
-
-}
-
-function divide (number1,number2){
-    if(number1 === 0){
-       return  alert('You can\'t divide by zero!!!!!');
-    }
-   return  number1 / number2;
-}
-
 btnEqual.addEventListener('click',operate);
 btnClear.addEventListener('click',clear);
+btnDelete.addEventListener('click',del);
 
