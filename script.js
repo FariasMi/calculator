@@ -1,6 +1,7 @@
-var operator = '';
-var firstOperand ='';
-var secondOperand = '';
+let currentOperator = '';
+let firstOperand ='';
+let secondOperand = '';
+let operator = '';
 
 const btnNumbers = document.querySelectorAll('[data-number]');
 const btnOperators = document.querySelectorAll('[data-operator]');
@@ -31,13 +32,11 @@ btnOperators.forEach(btn => btn.addEventListener('click',()=>{
 function appendNumbers(btnNumber){
     let number = currentDisplay.textContent;
     if(number.includes('.') && btnNumber==='.') return;
-    if(operator != ''){
-        secondOperand = firstOperand;
-        firstOperand = '';
-    }
-        firstOperand = number + btnNumber;  
-   
-    updateDisplay();  
+    firstOperand = number+ btnNumber; 
+    updateDisplay();
+    verifyOperands();
+    
+    
 }
 
    
@@ -51,6 +50,7 @@ function clear(){
 }
 
 function del(){
+   if(firstOperand === '') return;
    firstOperand = firstOperand.slice(0,-1);
    currentDisplay.innerHTML = firstOperand;
    
@@ -59,26 +59,33 @@ function del(){
 
 function updateDisplay(){
     currentDisplay.innerHTML= firstOperand;
-     if(operator!== ''){
-     return oldDisplay.innerHTML= `${firstOperand} ${operator}`;
+     if(operator!== ''){         
+        return oldDisplay.innerHTML= `${secondOperand} ${operator}`;
     }
     oldDisplay.innerHTML = secondOperand;
    
 }
 
 function preOperate(){
-    if(firstOperand === '') return;
-        operate();
-    }
-  
-    
-  
+    if(firstOperand === '')return;
+    secondOperand = firstOperand;
+    firstOperand = '';
+    updateDisplay();
+       
+}
+
+function verifyOperands(){
+   if(firstOperand!=='' && secondOperand !==''){
+       operate();
+   }   
+
+}
+
 function operate(){
     let computation;
     const prevNumber = parseFloat(secondOperand);
     const currentNumber = parseFloat(firstOperand);
-    if (operator === '') return;
-    if(isNaN(prevNumber) || isNaN(currentNumber))return;
+    if(isNaN(prevNumber) || isNaN(currentNumber && operator !=''))return;
 
 
     switch(operator){
@@ -93,13 +100,16 @@ function operate(){
             break;
         case'÷':
             computation = prevNumber / currentNumber;
+            if(currentNumber === 0){
+              return alert = 'Hey, you know you can\'t divide numbers by zero right?????'
+            }
             break
         default:
             return;
 
     }
     console.log(computation);
-    firstOperand = computation;
+    firstOperand = computation.toString();
     secondOperand = '';
     operator ='';
     updateDisplay();
