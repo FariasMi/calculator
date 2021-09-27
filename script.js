@@ -1,7 +1,8 @@
-let currentOperator = '';
 let firstOperand ='';
 let secondOperand = '';
+let currentOperator = '';
 let operator = '';
+
 
 const btnNumbers = document.querySelectorAll('[data-number]');
 const btnOperators = document.querySelectorAll('[data-operator]');
@@ -21,6 +22,9 @@ btnNumbers.forEach(btn => btn.addEventListener('click',()=>{
 
 btnOperators.forEach(btn => btn.addEventListener('click',()=>{
     operator = btn.innerText;
+    if(currentOperator!=''){
+        verifyOperands();
+    }
     updateDisplay();
     preOperate();
      
@@ -28,13 +32,11 @@ btnOperators.forEach(btn => btn.addEventListener('click',()=>{
 }));
   
 
-
 function appendNumbers(btnNumber){
     let number = currentDisplay.textContent;
     if(number.includes('.') && btnNumber==='.') return;
     firstOperand = number+ btnNumber; 
     updateDisplay();
-    verifyOperands();
     
     
 }
@@ -59,7 +61,7 @@ function del(){
 
 function updateDisplay(){
     currentDisplay.innerHTML= firstOperand;
-     if(operator!== ''){         
+     if(operator!== '' && secondOperand!==''){         
         return oldDisplay.innerHTML= `${secondOperand} ${operator}`;
     }
     oldDisplay.innerHTML = secondOperand;
@@ -68,6 +70,7 @@ function updateDisplay(){
 
 function preOperate(){
     if(firstOperand === '')return;
+    currentOperator = operator;
     secondOperand = firstOperand;
     firstOperand = '';
     updateDisplay();
@@ -85,10 +88,10 @@ function operate(){
     let computation;
     const prevNumber = parseFloat(secondOperand);
     const currentNumber = parseFloat(firstOperand);
-    if(isNaN(prevNumber) || isNaN(currentNumber && operator !=''))return;
+    if(isNaN(prevNumber) || isNaN(currentNumber && currentOperator !=''))return;
 
 
-    switch(operator){
+    switch(currentOperator){
         case '+':
             computation = prevNumber + currentNumber;
             break;
@@ -101,7 +104,8 @@ function operate(){
         case'÷':
             computation = prevNumber / currentNumber;
             if(currentNumber === 0){
-              return alert = 'Hey, you know you can\'t divide numbers by zero right?????'
+              return alert('Hey, you know you can\'t divide numbers by zero right?????');
+              
             }
             break
         default:
@@ -111,7 +115,7 @@ function operate(){
     console.log(computation);
     firstOperand = computation.toString();
     secondOperand = '';
-    operator ='';
+    currentOperator='';
     updateDisplay();
 }
 btnEqual.addEventListener('click',operate);
