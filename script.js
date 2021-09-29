@@ -2,7 +2,7 @@ let firstOperand ='';
 let secondOperand = '';
 let currentOperator = '';
 let operator = '';
-
+let isComputation=false;
 
 const btnNumbers = document.querySelectorAll('[data-number]');
 const btnOperators = document.querySelectorAll('[data-operator]');
@@ -11,13 +11,11 @@ const btnDelete = document.querySelector('[data-delete]');
 const btnClear = document.querySelector('[data-clear]');
 const currentDisplay = document.getElementById('current-display');
 const oldDisplay =  document.getElementById('old-display');
-
+const calculator = document.getElementById('calculator');
 
 
 btnNumbers.forEach(btn => btn.addEventListener('click',()=>{
-    appendNumbers (btn.innerText);
-
-    
+    appendNumbers (btn.innerText);    
 }));
 
 btnOperators.forEach(btn => btn.addEventListener('click',()=>{
@@ -31,9 +29,12 @@ btnOperators.forEach(btn => btn.addEventListener('click',()=>{
   
 }));
   
-
 function appendNumbers(btnNumber){
     let number = currentDisplay.textContent;
+    if(isComputation){
+        number = '';
+        isComputation=false;
+    }
     if(number.includes('.') && btnNumber==='.') return;
     firstOperand = number+ btnNumber; 
     updateDisplay();
@@ -104,6 +105,7 @@ function operate(){
         case'÷':
             computation = prevNumber / currentNumber;
             if(currentNumber === 0){
+                clear();
               return alert('Hey, you know you can\'t divide numbers by zero right?????');
               
             }
@@ -112,8 +114,9 @@ function operate(){
             return;
 
     }
-    console.log(computation);
+
     firstOperand = computation.toString();
+    isComputation=true;
     secondOperand = '';
     currentOperator='';
     updateDisplay();
