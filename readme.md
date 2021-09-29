@@ -8,7 +8,7 @@ I'm following the amazing path of [The odin Project](https://www.theodinproject.
 * CSS
 * JAVASCRIPT
 
-You can see the live demo [here]
+You can see the live demo [here](https://fariasmi.github.io/calculator/)
 
 
 
